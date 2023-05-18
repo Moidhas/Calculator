@@ -30,12 +30,12 @@ console.log(operate("1", "/", "2"));
 const names = ["+", "-", "*", "/", "="];
 const interface = document.querySelector('.interface');
 const clear = document.createElement('button');
-clear.textContent = "CLEAR"
+clear.textContent = "CLEAR";
 interface.appendChild(clear);
 for (let i = 0; i < 15; i++) {
     const btn = document.createElement('button');
     if (i < 10) {
-        btn.textContent = i; 
+        btn.textContent = i;
     } else {
         btn.textContent = names[i - 10];
     }
