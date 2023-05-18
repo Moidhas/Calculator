@@ -1,0 +1,11 @@
+body {
+    background-color: blanchedalmond;
+}
+
+.interface {
+    border: black solid 3px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
