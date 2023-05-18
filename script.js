@@ -27,7 +27,8 @@ function operate(a, operator, b) {
 }
 
 console.log(operate("1", "/", "2"));
-const names = ["+", "-", "*", "/", "="];
+const ops = [ {op: "+", id: "add"}, {op: "-", id: "sub"}, {op: "*", id: "prod"}, 
+                {op: "/", id: "divide"}, {op: "=", id: "equal"}];
 const interface = document.querySelector('.interface');
 const clear = document.createElement('button');
 clear.textContent = "CLEAR";
@@ -36,12 +37,12 @@ for (let i = 0; i < 15; i++) {
     const btn = document.createElement('button');
     if (i < 10) {
         btn.textContent = i;
+        btn.setAttribute("id", `n${i}`);
     } else {
-        btn.textContent = names[i - 10];
+        btn.textContent = ops[i - 10].op;
+        btn.setAttribute("id", `${ops[i - 10].id}`);
     }
     interface.appendChild(btn);
 }
-
-
 
 const buttons = document.querySelectorAll('button');
