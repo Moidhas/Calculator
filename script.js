@@ -27,10 +27,21 @@ function operate(a, operator, b) {
 }
 
 console.log(operate("1", "/", "2"));
+const names = ["+", "-", "*", "/", "="];
 const interface = document.querySelector('.interface');
-for (let i = 0; i < 10; i++) {
+const clear = document.createElement('button');
+clear.textContent = "CLEAR"
+interface.appendChild(clear);
+for (let i = 0; i < 15; i++) {
     const btn = document.createElement('button');
-    btn.textContent = i; 
+    if (i < 10) {
+        btn.textContent = i; 
+    } else {
+        btn.textContent = names[i - 10];
+    }
     interface.appendChild(btn);
 }
+
+
+
 const buttons = document.querySelectorAll('button');

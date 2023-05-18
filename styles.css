@@ -1,11 +1,28 @@
-body {
-    background-color: blanchedalmond;
+body, html {
+    height: 100%;
 }
 
-.interface {
-    border: black solid 3px;
-    border-radius: 20px;
+body {
+    background-color: blanchedalmond;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.calculator {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    border: red solid 1px; 
+}
+
+.display,
+.interface {
+    border: black solid 3px;
+    border-radius: 20px;
+}
+
+.interface {
+    height: 500px;
 }
