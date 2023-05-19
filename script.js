@@ -11,7 +11,7 @@ function prod(a, b) {
 }
 
 function divide(a, b) {
-    return (+a) / (+b); 
+    return (+a) / (+b);
 }
 
 function operate(a, operator, b) {
@@ -26,48 +26,75 @@ function operate(a, operator, b) {
     }
 }
 
-function display(btn, zeroValue) {
-    if (zeroValue) {
-        screen.textContent = btn.textContent;
-    } else {
-        screen.textContent += btn.textContent;
+function clearing() {
+    display.textContent = "0"
+    for(let key in expression) {
+        delete expression[key];
     }
 }
 
+function displayNum(num, insert) {
+    if (display.textContent === "0" || insert) {
+        display.textContent = num; 
+    }  else {
+        display.textContent += num;  
+    }
+    expression.clicked = false;
+}
 
 
-// might not need id's
-const ops = [ {op: "+", id: "add"}, {op: "-", id: "sub"}, {op: "*", id: "prod"}, 
-                {op: "/", id: "divide"}, {op: "=", id: "equal"}];
-
-const screen = document.querySelector('.display');
+let expression = {clicked: false};
+const display = document.querySelector('.display');
 const interface = document.querySelector('.interface');
 
 const clear = document.createElement('button');
 clear.textContent = "CLEAR";
-clear.addEventListener("click", () => console.log("yo"));
+clear.addEventListener("click", () => clearing());
 interface.appendChild(clear);
 
-for (let i = 0; i < 15; i++) {
+// number buttons creation
+for(let i = 0; i < 10; i++) {
     const btn = document.createElement('button');
-    if (i < 10) {
-        btn.textContent = i;
-        btn.setAttribute("id", `n${i}`);
-        btn.addEventListener("click", () => {
-            if (screen.textContent === "0") {
-                display(btn, true);
-            } else {
-                display(btn, false);
-            }
-        });
-        
-    } else {
-        btn.textContent = ops[i - 10].op;
-        btn.setAttribute("id", `${ops[i - 10].id}`);
-        btn.addEventListener("click", () => console.log("yo"));
-    }
-    
+    btn.textContent = i; 
+    btn.addEventListener('click', () => displayNum(+btn.textContent, expression.clicked));
     interface.appendChild(btn);
 }
+
+// operator buttons creation besides = sign
+names = ["+", "-", "*", "/"];
+for (let i = 0; i < 4; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = names[i];
+    btn.addEventListener('click', () => {
+        expression.clicked = true; 
+        if (!("a" in expression)) {
+            expression.a = display.textContent; 
+        } else {
+            expression.b = display.textContent; 
+            const num = operate(expression.a, expression.operator, expression.b);
+            display.textContent = num;
+            delete expression.a; 
+            delete expression.b; 
+        }
+        expression.operator = btn.textContent; 
+    });
+    interface.appendChild(btn); 
+}
+
+const equal = document.createElement('button');
+equal.textContent = "=";
+equal.addEventListener('click', () => {
+    expression.clicked = true; 
+    if (("a" in expression) && ("b" in expression)) {
+        const num = operate(expression.a, expression.operator, expression.b);
+        display.textContent = num;
+        delete expression.a; 
+        delete expression.b; 
+        delete expression.operator; 
+    }
+})
+interface.appendChild(equal);
+
+
 
 
