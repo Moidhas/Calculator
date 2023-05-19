@@ -71,9 +71,8 @@ for (let i = 0; i < 4; i++) {
             expression.a = display.textContent; 
         } else {
             expression.b = display.textContent; 
-            const num = operate(expression.a, expression.operator, expression.b);
-            display.textContent = num;
-            delete expression.a; 
+            expression.a = operate(expression.a, expression.operator, expression.b);
+            display.textContent = expression.a;
             delete expression.b; 
         }
         expression.operator = btn.textContent; 
@@ -85,7 +84,8 @@ const equal = document.createElement('button');
 equal.textContent = "=";
 equal.addEventListener('click', () => {
     expression.clicked = true; 
-    if (("a" in expression) && ("b" in expression)) {
+    if (("a" in expression)) {
+        expression.b = display.textContent; 
         const num = operate(expression.a, expression.operator, expression.b);
         display.textContent = num;
         delete expression.a; 
